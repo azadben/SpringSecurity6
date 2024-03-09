@@ -1,4 +1,4 @@
-package com.eazybytes.config;
+package com.eazybytes.service;
 
 import com.eazybytes.model.Customer;
 import com.eazybytes.repository.CustomerRepository;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class EazyBankUserDetails implements UserDetailsService {
+public class customerUserDetailsService implements UserDetailsService {
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -35,5 +35,4 @@ public class EazyBankUserDetails implements UserDetailsService {
         }
         return new User(userName,password,authorities);
     }
-
 }

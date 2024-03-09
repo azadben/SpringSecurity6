@@ -40,11 +40,14 @@ public class ProjectSecurityConfig {
         return NoOpPasswordEncoder.getInstance();
     }
 
-    /*@Bean
+
+
+    /** Approach 1 where we use withDefaultPasswordEncoder() method
+		while creating the user details **/
+    /* @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-        *//*Approach 1 where we use withDefaultPasswordEncoder() method
-		while creating the user details*//*
-        *//*UserDetails admin = User.withDefaultPasswordEncoder()
+
+        UserDetails admin = User.withDefaultPasswordEncoder()
                 .username("admin")
                 .password("12345")
                 .authorities("admin")
@@ -54,10 +57,15 @@ public class ProjectSecurityConfig {
                 .password("12345")
                 .authorities("read")
                 .build();
-        return new InMemoryUserDetailsManager(admin, user);*//*
+        return new InMemoryUserDetailsManager(admin, user); */
 
-         *//*Approach 2 where we use NoOpPasswordEncoder Bean
-		while creating the user details*//*
+
+
+
+    /**  Approach 2 where we use NoOpPasswordEncoder Bean
+       while creating the user details **/
+    /*@Bean
+    public InMemoryUserDetailsManager userDetailsService() {
         UserDetails admin = User.withUsername("admin")
                 .password("12345")
                 .authorities("admin")
@@ -67,12 +75,25 @@ public class ProjectSecurityConfig {
                 .authorities("read")
                 .build();
         return new InMemoryUserDetailsManager(admin, user);
-
     }*/
 
-    /*@Bean
+
+
+    /**    approch 3 - Instead of storing user inside the memory of web server, we can store
+         them inside DB and with help of JdbcUserDetailsManager, we can perform authentication.
+        N OTE - please create tables as per JdbcUserDetailsManager(dataSource), insert user inside them.
+     **/
+  /*   @Bean
     public UserDetailsService userDetailsService(DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource);
-    }*/
+        return new JdbcUserDetailsManager(dataSource);*/
 
-}
+
+
+
+    /**    approch 4 -Creating our own custom tables for Authentication.
+            1. created - Customer table
+            2. create customerUserDetailsService implements UserDetailsService
+                    and override loadUserByUsername() method.
+     **/
+
+    }
